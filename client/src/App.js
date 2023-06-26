@@ -18,9 +18,14 @@ function App() {
                 </div>
                 <div className="post-text">
                     <h2>This week in AI: Big tech bets billions on machine learning tools</h2>
-                    <p>Keeping up with an industry as fast-moving as AI is a tall order. So until an AI can do it for
+                    <p className="info">
+                        <a href="" className="author">Alex Nosovka</a>
+                        <time>26-06-2023 13:34</time>
+                    </p>
+                    <p className="summary">Keeping up with an industry as fast-moving as AI is a tall order. So until an AI can do it for
                         you, here’s a handy roundup of the last week’s stories in the world of machine learning, along
-                        with no...</p>
+                        with no...
+                    </p>
                 </div>
             </div>
             <div className="post">
@@ -31,9 +36,14 @@ function App() {
                 </div>
                 <div className="post-text">
                     <h2>This week in AI: Big tech bets billions on machine learning tools</h2>
-                    <p>Keeping up with an industry as fast-moving as AI is a tall order. So until an AI can do it for
+                    <p className="info">
+                        <a href="" className="author">Alex Nosovka</a>
+                        <time>26-06-2023 13:34</time>
+                    </p>
+                    <p className="summary">Keeping up with an industry as fast-moving as AI is a tall order. So until an AI can do it for
                         you, here’s a handy roundup of the last week’s stories in the world of machine learning, along
-                        with no...</p>
+                        with no...
+                    </p>
                 </div>
             </div>
             <div className="post">
@@ -44,9 +54,14 @@ function App() {
                 </div>
                 <div className="post-text">
                     <h2>This week in AI: Big tech bets billions on machine learning tools</h2>
-                    <p>Keeping up with an industry as fast-moving as AI is a tall order. So until an AI can do it for
+                    <p className="info">
+                        <a href="" className="author">Alex Nosovka</a>
+                        <time>26-06-2023 13:34</time>
+                    </p>
+                    <p className="summary">Keeping up with an industry as fast-moving as AI is a tall order. So until an AI can do it for
                         you, here’s a handy roundup of the last week’s stories in the world of machine learning, along
-                        with no...</p>
+                        with no...
+                    </p>
                 </div>
             </div>
         </main>
