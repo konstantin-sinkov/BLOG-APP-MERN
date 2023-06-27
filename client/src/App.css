@@ -69,6 +69,20 @@ header nav {
     line-height: 1.4rem;
 }
 
+form.login, form.register {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+form input {
+    padding: 5px;
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    border: 0;
+    background-color: #eeeeee;
+}
+
 
 
 
