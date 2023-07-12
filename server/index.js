@@ -1,30 +1,35 @@
 const express = require("express");
 const cors = require('cors');
-
-const app = express();
-app.use(cors);
-app.use(express.json());
+require('dotenv').config();
 
 const {PORT} = require("./configs/config");
-const {config} = require("dotenv");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+
 
 app.post('/register', ((req, res) => {
-    const {name, password} = req.body;
-    console.log(name, password)
-    // res.json({requestData: {name, password}});
-    // console.log(req.body);
+    const {userName, userPassword} = req.body;
+    res.json({requestData: {userName, userPassword}});
+
+    console.log('111111');
+    console.log(req.body);
     console.log('111111');
 }))
 
-// app.get('/', ((req, res) => {
-//     res.json('test, ok!');
-// }))
+app.get("/", (req, res) => {
+    res.send('port ' + PORT);
+})
 
-
-
-app.listen(4000, () => {
-    console.log('Server listens 4000');
+app.listen(PORT, () => {
+    console.log('Server listens ' + PORT);
 });
+
+
+
 
 
 
