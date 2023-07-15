@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 
 import {userService} from "../../services";
-import axios from "axios";
 
 const RegisterPage = () => {
     const [userName, setUserName] = useState('');
@@ -9,31 +8,21 @@ const RegisterPage = () => {
     
     const handleSubmit = async (ev) => {
       ev.preventDefault();
+      const userData = {userName, userPassword};
       
-      const userData = {
-          userName,
-          userPassword
-      };
+      const response = await userService.registerUser(userData);
       
-      try {
-          if (userName && userPassword) {
-              await userService.registerUser(userData);
-          }
-          // const response = await axios.post("http://localhost:4005/register", userData);
-          // console.log(response);
-      } catch (e) {
-          console.log(e);
-      }
+      response.status === 200 ? alert('Registration succeed!') : alert('Registration failed!');
+      
+      //
+      // try {
+      //     if (userName && userPassword) {
+      //         await userService.registerUser(userData);
+      //     }
+      // } catch (e) {
+      //     console.log(e);
+      // }
     }
-    
-    // const register = async (e) => {
-    //     e.preventDefault();
-    //
-    //     await userService.registerUser({
-    //         name: userName,
-    //         password: userPassword
-    //     })
-    // }
     
     return (
         <form className="register" onSubmit={handleSubmit}>
