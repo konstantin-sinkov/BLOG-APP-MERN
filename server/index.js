@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 const {PORT, DB_PASSWORD, DB_USER, JWT_SALT} = require("./configs/config");
@@ -13,6 +14,7 @@ const salt = bcrypt.genSaltSync(10);
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 
 
 app.post('/register', async (req, res) => {
@@ -31,33 +33,44 @@ app.post('/register', async (req, res) => {
     console.log('111111');
     console.log(req.body);
     console.log('111111');
-})
+});
 
 app.post('/login', async (req, res) => {
     const {userName, userPassword} = req.body;
-    console.log(req.body);
+    
+    //check is username exist
     const loginUser = await User.findOne({username: userName});
     
-    // res.json(loginUser);
+    //check is input pass identical to hashed pass in db
     const isPassOk = bcrypt.compareSync(userPassword, loginUser.password);
-    // res.json(isPassOk);
     if (isPassOk) {
         // logged in
         try {
+            //generating token with user_info (login and id from db)
             const token = await jwt.sign({userName, id: loginUser._id}, JWT_SALT);
             // res.json(token);
+            //send cookie in the response
             res.cookie('token', token).json('ok');
         } catch (err) {
             console.log(err.message);
         }
-        // jwt.sign({userName, id: loginUser._id}, JWT_SALT, {}, (err, token) => {
-        //     if (err) throw err;
-        //     res.json(token);
-        // });
     } else {
         res.status(400).json('wrong credentials!');
     }
-})
+});
+
+//waypoint for checking is token in cookie present and valid
+app.get('/profile', (req, res) => {
+    // res.json(req.cookies);
+    const {token} = req.cookies;
+    
+    jwt.verify(token, JWT_SALT, {}, (err, info) => {
+        if (err) throw err;
+        // console.log(info);
+        res.json(info);
+    })
+    
+});
 
 app.get("/", async (req, res) => {
     const users = await User.find({});

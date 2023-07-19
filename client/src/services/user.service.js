@@ -3,7 +3,8 @@ import {axiosService} from "./axios.service";
 
 const userService = {
     registerUser: (user) => axiosService.post(urls.register, user),
-    loginUser: (user) => axiosService.post(urls.login, user, {withCredentials: true})
+    loginUser: (user) => axiosService.post(urls.login, user, {withCredentials: true}),
+    profile: () => axiosService.get(urls.profile, {withCredentials: true})
 }
 
 export {userService}
