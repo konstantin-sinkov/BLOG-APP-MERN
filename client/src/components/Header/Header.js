@@ -20,15 +20,7 @@ const Header = () => {
             }
         };
         fetchData();
-    
-        // fetch("http://localhost:4005/profile", {
-        //     credentials: "include"
-        // }).then(response => {
-        //     response.json().then(userInfo => {
-        //         console.log(userInfo);
-        //         setUsername(userInfo.userName);
-        //     });
-        // });
+        
     }, []);
     console.log(username);
     return (
