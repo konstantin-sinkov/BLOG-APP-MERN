@@ -50,7 +50,10 @@ app.post('/login', async (req, res) => {
             const token = await jwt.sign({userName, id: loginUser._id}, JWT_SALT);
             // res.json(token);
             //send cookie in the response
-            res.cookie('token', token).json('ok');
+            res.cookie('token', token).json({
+                id: loginUser._id,
+                username: userName
+            });
         } catch (err) {
             console.log(err.message);
         }
@@ -59,7 +62,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-//waypoint for checking is token in cookie present and valid
+//waypoint for profile (checking is token in cookie present and valid)
 app.get('/profile', (req, res) => {
     // res.json(req.cookies);
     const {token} = req.cookies;
@@ -69,8 +72,11 @@ app.get('/profile', (req, res) => {
         // console.log(info);
         res.json(info);
     })
-    
 });
+
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json('ok');
+})
 
 app.get("/", async (req, res) => {
     const users = await User.find({});
