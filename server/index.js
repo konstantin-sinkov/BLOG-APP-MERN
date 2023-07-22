@@ -1,22 +1,27 @@
+//import modules
 const express = require("express");
 const cors = require('cors');
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-
 require('dotenv').config();
-const {PORT, DB_PASSWORD, DB_USER, JWT_SALT} = require("./configs/config");
-const User = require("./models/User")
 
+const {PORT, DB_PASSWORD, DB_USER, JWT_SALT} = require("./configs/config");
+const User = require("./models/User");
+
+//app
 const app = express();
-const salt = bcrypt.genSaltSync(10);
+
+//middleware
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 
+const salt = bcrypt.genSaltSync(10);
+//routes
 app.post('/register', async (req, res) => {
     const {userName, userPassword} = req.body;
     
@@ -62,7 +67,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-//waypoint for profile (checking is token in cookie present and valid)
+    //waypoint for profile (checking is token in cookie present and valid)
 app.get('/profile', (req, res) => {
     // res.json(req.cookies);
     const {token} = req.cookies;
@@ -95,8 +100,3 @@ const start = async () => {
 };
 
 start();
-
-
-
-
-
